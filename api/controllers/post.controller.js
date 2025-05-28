@@ -1,4 +1,4 @@
-import prisma from "../lib/prisma";
+import prisma from "../lib/prisma.js";
 
 export const getPosts = async (req, res) => {
   try {
@@ -12,9 +12,17 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPost = async (req, res) => {
-  const id = req.params;
+  const id = req.params.id;
   try {
-    const post = await prisma.post.findUnique({ where: { id } });
+    const post = await prisma.post.findUnique({ where: { id },include:{
+        postDetail:true, 
+        user:{
+            select:{ 
+                username:true, 
+                avatar:true
+            }
+        }
+    } });
 
     res.status(200).json(post);
   } catch (err) {
@@ -30,14 +38,17 @@ export const addPost = async (req, res) => {
   try {
     const newPost = await prisma.post.create({
       data: {
-        ...body,
+        ...body.postData,
         userId: tokenUserId,
+        postDetail: {
+          create: body.postDetail,
+        },
       },
     });
     res.status(200).json(newPost);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to get posts " });
+    res.status(500).json({ message: "Failed to add posts " });
   }
 };
 
@@ -62,7 +73,7 @@ export const deletePost = async (req, res) => {
     await prisma.post.delete({
       where: { id },
     });
-    res.status(200).json({message:"Post delete"});
+    res.status(200).json({ message: "Post delete" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to get posts " });

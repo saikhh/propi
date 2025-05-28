@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
+/**
+ * Model PostDetail
+ * 
+ */
+export type PostDetail = $Result.DefaultSelection<Prisma.$PostDetailPayload>
 
 /**
  * Enums
@@ -166,6 +171,16 @@ export class PrismaClient<
     * ```
     */
   get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.postDetail`: Exposes CRUD operations for the **PostDetail** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PostDetails
+    * const postDetails = await prisma.postDetail.findMany()
+    * ```
+    */
+  get postDetail(): Prisma.PostDetailDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -607,7 +622,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Post: 'Post'
+    Post: 'Post',
+    PostDetail: 'PostDetail'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -626,7 +642,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post"
+      modelProps: "user" | "post" | "postDetail"
       txIsolationLevel: never
     }
     model: {
@@ -778,6 +794,80 @@ export namespace Prisma {
           }
         }
       }
+      PostDetail: {
+        payload: Prisma.$PostDetailPayload<ExtArgs>
+        fields: Prisma.PostDetailFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PostDetailFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PostDetailFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload>
+          }
+          findFirst: {
+            args: Prisma.PostDetailFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PostDetailFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload>
+          }
+          findMany: {
+            args: Prisma.PostDetailFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload>[]
+          }
+          create: {
+            args: Prisma.PostDetailCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload>
+          }
+          createMany: {
+            args: Prisma.PostDetailCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PostDetailDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload>
+          }
+          update: {
+            args: Prisma.PostDetailUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload>
+          }
+          deleteMany: {
+            args: Prisma.PostDetailDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PostDetailUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PostDetailUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PostDetailPayload>
+          }
+          aggregate: {
+            args: Prisma.PostDetailAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePostDetail>
+          }
+          groupBy: {
+            args: Prisma.PostDetailGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PostDetailGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.PostDetailFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.PostDetailAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.PostDetailCountArgs<ExtArgs>
+            result: $Utils.Optional<PostDetailCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -851,6 +941,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     post?: PostOmit
+    postDetail?: PostDetailOmit
   }
 
   /* Types for Logging */
@@ -2019,7 +2110,6 @@ export namespace Prisma {
     id: string | null
     title: string | null
     price: number | null
-    img: string | null
     address: string | null
     city: string | null
     bedroom: number | null
@@ -2036,7 +2126,6 @@ export namespace Prisma {
     id: string | null
     title: string | null
     price: number | null
-    img: string | null
     address: string | null
     city: string | null
     bedroom: number | null
@@ -2053,7 +2142,7 @@ export namespace Prisma {
     id: number
     title: number
     price: number
-    img: number
+    images: number
     address: number
     city: number
     bedroom: number
@@ -2084,7 +2173,6 @@ export namespace Prisma {
     id?: true
     title?: true
     price?: true
-    img?: true
     address?: true
     city?: true
     bedroom?: true
@@ -2101,7 +2189,6 @@ export namespace Prisma {
     id?: true
     title?: true
     price?: true
-    img?: true
     address?: true
     city?: true
     bedroom?: true
@@ -2118,7 +2205,7 @@ export namespace Prisma {
     id?: true
     title?: true
     price?: true
-    img?: true
+    images?: true
     address?: true
     city?: true
     bedroom?: true
@@ -2222,7 +2309,7 @@ export namespace Prisma {
     id: string
     title: string
     price: number
-    img: string
+    images: string[]
     address: string
     city: string
     bedroom: number
@@ -2258,7 +2345,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     price?: boolean
-    img?: boolean
+    images?: boolean
     address?: boolean
     city?: boolean
     bedroom?: boolean
@@ -2270,6 +2357,7 @@ export namespace Prisma {
     userId?: boolean
     createdAtd?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    postDetail?: boolean | Post$postDetailArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
 
@@ -2278,7 +2366,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     price?: boolean
-    img?: boolean
+    images?: boolean
     address?: boolean
     city?: boolean
     bedroom?: boolean
@@ -2291,21 +2379,23 @@ export namespace Prisma {
     createdAtd?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "price" | "img" | "address" | "city" | "bedroom" | "bathroom" | "latitude" | "longitude" | "type" | "property" | "userId" | "createdAtd", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "price" | "images" | "address" | "city" | "bedroom" | "bathroom" | "latitude" | "longitude" | "type" | "property" | "userId" | "createdAtd", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    postDetail?: boolean | Post$postDetailArgs<ExtArgs>
   }
 
   export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Post"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      postDetail: Prisma.$PostDetailPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       price: number
-      img: string
+      images: string[]
       address: string
       city: string
       bedroom: number
@@ -2680,6 +2770,7 @@ export namespace Prisma {
   export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    postDetail<T extends Post$postDetailArgs<ExtArgs> = {}>(args?: Subset<T, Post$postDetailArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2712,7 +2803,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Post", 'String'>
     readonly title: FieldRef<"Post", 'String'>
     readonly price: FieldRef<"Post", 'Int'>
-    readonly img: FieldRef<"Post", 'String'>
+    readonly images: FieldRef<"Post", 'String[]'>
     readonly address: FieldRef<"Post", 'String'>
     readonly city: FieldRef<"Post", 'String'>
     readonly bedroom: FieldRef<"Post", 'Int'>
@@ -3093,6 +3184,25 @@ export namespace Prisma {
   }
 
   /**
+   * Post.postDetail
+   */
+  export type Post$postDetailArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    where?: PostDetailWhereInput
+  }
+
+  /**
    * Post without action
    */
   export type PostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3108,6 +3218,1086 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PostInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PostDetail
+   */
+
+  export type AggregatePostDetail = {
+    _count: PostDetailCountAggregateOutputType | null
+    _avg: PostDetailAvgAggregateOutputType | null
+    _sum: PostDetailSumAggregateOutputType | null
+    _min: PostDetailMinAggregateOutputType | null
+    _max: PostDetailMaxAggregateOutputType | null
+  }
+
+  export type PostDetailAvgAggregateOutputType = {
+    size: number | null
+    school: number | null
+    bus: number | null
+    restaurant: number | null
+  }
+
+  export type PostDetailSumAggregateOutputType = {
+    size: number | null
+    school: number | null
+    bus: number | null
+    restaurant: number | null
+  }
+
+  export type PostDetailMinAggregateOutputType = {
+    id: string | null
+    desc: string | null
+    utilities: string | null
+    pet: string | null
+    income: string | null
+    size: number | null
+    school: number | null
+    bus: number | null
+    restaurant: number | null
+    postId: string | null
+  }
+
+  export type PostDetailMaxAggregateOutputType = {
+    id: string | null
+    desc: string | null
+    utilities: string | null
+    pet: string | null
+    income: string | null
+    size: number | null
+    school: number | null
+    bus: number | null
+    restaurant: number | null
+    postId: string | null
+  }
+
+  export type PostDetailCountAggregateOutputType = {
+    id: number
+    desc: number
+    utilities: number
+    pet: number
+    income: number
+    size: number
+    school: number
+    bus: number
+    restaurant: number
+    postId: number
+    _all: number
+  }
+
+
+  export type PostDetailAvgAggregateInputType = {
+    size?: true
+    school?: true
+    bus?: true
+    restaurant?: true
+  }
+
+  export type PostDetailSumAggregateInputType = {
+    size?: true
+    school?: true
+    bus?: true
+    restaurant?: true
+  }
+
+  export type PostDetailMinAggregateInputType = {
+    id?: true
+    desc?: true
+    utilities?: true
+    pet?: true
+    income?: true
+    size?: true
+    school?: true
+    bus?: true
+    restaurant?: true
+    postId?: true
+  }
+
+  export type PostDetailMaxAggregateInputType = {
+    id?: true
+    desc?: true
+    utilities?: true
+    pet?: true
+    income?: true
+    size?: true
+    school?: true
+    bus?: true
+    restaurant?: true
+    postId?: true
+  }
+
+  export type PostDetailCountAggregateInputType = {
+    id?: true
+    desc?: true
+    utilities?: true
+    pet?: true
+    income?: true
+    size?: true
+    school?: true
+    bus?: true
+    restaurant?: true
+    postId?: true
+    _all?: true
+  }
+
+  export type PostDetailAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PostDetail to aggregate.
+     */
+    where?: PostDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostDetails to fetch.
+     */
+    orderBy?: PostDetailOrderByWithRelationInput | PostDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PostDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PostDetails
+    **/
+    _count?: true | PostDetailCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PostDetailAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PostDetailSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PostDetailMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PostDetailMaxAggregateInputType
+  }
+
+  export type GetPostDetailAggregateType<T extends PostDetailAggregateArgs> = {
+        [P in keyof T & keyof AggregatePostDetail]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePostDetail[P]>
+      : GetScalarType<T[P], AggregatePostDetail[P]>
+  }
+
+
+
+
+  export type PostDetailGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostDetailWhereInput
+    orderBy?: PostDetailOrderByWithAggregationInput | PostDetailOrderByWithAggregationInput[]
+    by: PostDetailScalarFieldEnum[] | PostDetailScalarFieldEnum
+    having?: PostDetailScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PostDetailCountAggregateInputType | true
+    _avg?: PostDetailAvgAggregateInputType
+    _sum?: PostDetailSumAggregateInputType
+    _min?: PostDetailMinAggregateInputType
+    _max?: PostDetailMaxAggregateInputType
+  }
+
+  export type PostDetailGroupByOutputType = {
+    id: string
+    desc: string
+    utilities: string | null
+    pet: string | null
+    income: string | null
+    size: number | null
+    school: number | null
+    bus: number | null
+    restaurant: number | null
+    postId: string
+    _count: PostDetailCountAggregateOutputType | null
+    _avg: PostDetailAvgAggregateOutputType | null
+    _sum: PostDetailSumAggregateOutputType | null
+    _min: PostDetailMinAggregateOutputType | null
+    _max: PostDetailMaxAggregateOutputType | null
+  }
+
+  type GetPostDetailGroupByPayload<T extends PostDetailGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PostDetailGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PostDetailGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PostDetailGroupByOutputType[P]>
+            : GetScalarType<T[P], PostDetailGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PostDetailSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    desc?: boolean
+    utilities?: boolean
+    pet?: boolean
+    income?: boolean
+    size?: boolean
+    school?: boolean
+    bus?: boolean
+    restaurant?: boolean
+    postId?: boolean
+    post?: boolean | PostDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["postDetail"]>
+
+
+
+  export type PostDetailSelectScalar = {
+    id?: boolean
+    desc?: boolean
+    utilities?: boolean
+    pet?: boolean
+    income?: boolean
+    size?: boolean
+    school?: boolean
+    bus?: boolean
+    restaurant?: boolean
+    postId?: boolean
+  }
+
+  export type PostDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "desc" | "utilities" | "pet" | "income" | "size" | "school" | "bus" | "restaurant" | "postId", ExtArgs["result"]["postDetail"]>
+  export type PostDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    post?: boolean | PostDefaultArgs<ExtArgs>
+  }
+
+  export type $PostDetailPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PostDetail"
+    objects: {
+      post: Prisma.$PostPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      desc: string
+      utilities: string | null
+      pet: string | null
+      income: string | null
+      size: number | null
+      school: number | null
+      bus: number | null
+      restaurant: number | null
+      postId: string
+    }, ExtArgs["result"]["postDetail"]>
+    composites: {}
+  }
+
+  type PostDetailGetPayload<S extends boolean | null | undefined | PostDetailDefaultArgs> = $Result.GetResult<Prisma.$PostDetailPayload, S>
+
+  type PostDetailCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PostDetailFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PostDetailCountAggregateInputType | true
+    }
+
+  export interface PostDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PostDetail'], meta: { name: 'PostDetail' } }
+    /**
+     * Find zero or one PostDetail that matches the filter.
+     * @param {PostDetailFindUniqueArgs} args - Arguments to find a PostDetail
+     * @example
+     * // Get one PostDetail
+     * const postDetail = await prisma.postDetail.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PostDetailFindUniqueArgs>(args: SelectSubset<T, PostDetailFindUniqueArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PostDetail that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PostDetailFindUniqueOrThrowArgs} args - Arguments to find a PostDetail
+     * @example
+     * // Get one PostDetail
+     * const postDetail = await prisma.postDetail.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PostDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, PostDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PostDetail that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostDetailFindFirstArgs} args - Arguments to find a PostDetail
+     * @example
+     * // Get one PostDetail
+     * const postDetail = await prisma.postDetail.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PostDetailFindFirstArgs>(args?: SelectSubset<T, PostDetailFindFirstArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PostDetail that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostDetailFindFirstOrThrowArgs} args - Arguments to find a PostDetail
+     * @example
+     * // Get one PostDetail
+     * const postDetail = await prisma.postDetail.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PostDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, PostDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PostDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostDetailFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PostDetails
+     * const postDetails = await prisma.postDetail.findMany()
+     * 
+     * // Get first 10 PostDetails
+     * const postDetails = await prisma.postDetail.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const postDetailWithIdOnly = await prisma.postDetail.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PostDetailFindManyArgs>(args?: SelectSubset<T, PostDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PostDetail.
+     * @param {PostDetailCreateArgs} args - Arguments to create a PostDetail.
+     * @example
+     * // Create one PostDetail
+     * const PostDetail = await prisma.postDetail.create({
+     *   data: {
+     *     // ... data to create a PostDetail
+     *   }
+     * })
+     * 
+     */
+    create<T extends PostDetailCreateArgs>(args: SelectSubset<T, PostDetailCreateArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PostDetails.
+     * @param {PostDetailCreateManyArgs} args - Arguments to create many PostDetails.
+     * @example
+     * // Create many PostDetails
+     * const postDetail = await prisma.postDetail.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PostDetailCreateManyArgs>(args?: SelectSubset<T, PostDetailCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PostDetail.
+     * @param {PostDetailDeleteArgs} args - Arguments to delete one PostDetail.
+     * @example
+     * // Delete one PostDetail
+     * const PostDetail = await prisma.postDetail.delete({
+     *   where: {
+     *     // ... filter to delete one PostDetail
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PostDetailDeleteArgs>(args: SelectSubset<T, PostDetailDeleteArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PostDetail.
+     * @param {PostDetailUpdateArgs} args - Arguments to update one PostDetail.
+     * @example
+     * // Update one PostDetail
+     * const postDetail = await prisma.postDetail.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PostDetailUpdateArgs>(args: SelectSubset<T, PostDetailUpdateArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PostDetails.
+     * @param {PostDetailDeleteManyArgs} args - Arguments to filter PostDetails to delete.
+     * @example
+     * // Delete a few PostDetails
+     * const { count } = await prisma.postDetail.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PostDetailDeleteManyArgs>(args?: SelectSubset<T, PostDetailDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PostDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostDetailUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PostDetails
+     * const postDetail = await prisma.postDetail.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PostDetailUpdateManyArgs>(args: SelectSubset<T, PostDetailUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PostDetail.
+     * @param {PostDetailUpsertArgs} args - Arguments to update or create a PostDetail.
+     * @example
+     * // Update or create a PostDetail
+     * const postDetail = await prisma.postDetail.upsert({
+     *   create: {
+     *     // ... data to create a PostDetail
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PostDetail we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PostDetailUpsertArgs>(args: SelectSubset<T, PostDetailUpsertArgs<ExtArgs>>): Prisma__PostDetailClient<$Result.GetResult<Prisma.$PostDetailPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PostDetails that matches the filter.
+     * @param {PostDetailFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const postDetail = await prisma.postDetail.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: PostDetailFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a PostDetail.
+     * @param {PostDetailAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const postDetail = await prisma.postDetail.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: PostDetailAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of PostDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostDetailCountArgs} args - Arguments to filter PostDetails to count.
+     * @example
+     * // Count the number of PostDetails
+     * const count = await prisma.postDetail.count({
+     *   where: {
+     *     // ... the filter for the PostDetails we want to count
+     *   }
+     * })
+    **/
+    count<T extends PostDetailCountArgs>(
+      args?: Subset<T, PostDetailCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PostDetailCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PostDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostDetailAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PostDetailAggregateArgs>(args: Subset<T, PostDetailAggregateArgs>): Prisma.PrismaPromise<GetPostDetailAggregateType<T>>
+
+    /**
+     * Group by PostDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PostDetailGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PostDetailGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PostDetailGroupByArgs['orderBy'] }
+        : { orderBy?: PostDetailGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PostDetailGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPostDetailGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PostDetail model
+   */
+  readonly fields: PostDetailFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PostDetail.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PostDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    post<T extends PostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PostDefaultArgs<ExtArgs>>): Prisma__PostClient<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PostDetail model
+   */
+  interface PostDetailFieldRefs {
+    readonly id: FieldRef<"PostDetail", 'String'>
+    readonly desc: FieldRef<"PostDetail", 'String'>
+    readonly utilities: FieldRef<"PostDetail", 'String'>
+    readonly pet: FieldRef<"PostDetail", 'String'>
+    readonly income: FieldRef<"PostDetail", 'String'>
+    readonly size: FieldRef<"PostDetail", 'Int'>
+    readonly school: FieldRef<"PostDetail", 'Int'>
+    readonly bus: FieldRef<"PostDetail", 'Int'>
+    readonly restaurant: FieldRef<"PostDetail", 'Int'>
+    readonly postId: FieldRef<"PostDetail", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PostDetail findUnique
+   */
+  export type PostDetailFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which PostDetail to fetch.
+     */
+    where: PostDetailWhereUniqueInput
+  }
+
+  /**
+   * PostDetail findUniqueOrThrow
+   */
+  export type PostDetailFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which PostDetail to fetch.
+     */
+    where: PostDetailWhereUniqueInput
+  }
+
+  /**
+   * PostDetail findFirst
+   */
+  export type PostDetailFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which PostDetail to fetch.
+     */
+    where?: PostDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostDetails to fetch.
+     */
+    orderBy?: PostDetailOrderByWithRelationInput | PostDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PostDetails.
+     */
+    cursor?: PostDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PostDetails.
+     */
+    distinct?: PostDetailScalarFieldEnum | PostDetailScalarFieldEnum[]
+  }
+
+  /**
+   * PostDetail findFirstOrThrow
+   */
+  export type PostDetailFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which PostDetail to fetch.
+     */
+    where?: PostDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostDetails to fetch.
+     */
+    orderBy?: PostDetailOrderByWithRelationInput | PostDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PostDetails.
+     */
+    cursor?: PostDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PostDetails.
+     */
+    distinct?: PostDetailScalarFieldEnum | PostDetailScalarFieldEnum[]
+  }
+
+  /**
+   * PostDetail findMany
+   */
+  export type PostDetailFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which PostDetails to fetch.
+     */
+    where?: PostDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PostDetails to fetch.
+     */
+    orderBy?: PostDetailOrderByWithRelationInput | PostDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PostDetails.
+     */
+    cursor?: PostDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PostDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PostDetails.
+     */
+    skip?: number
+    distinct?: PostDetailScalarFieldEnum | PostDetailScalarFieldEnum[]
+  }
+
+  /**
+   * PostDetail create
+   */
+  export type PostDetailCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PostDetail.
+     */
+    data: XOR<PostDetailCreateInput, PostDetailUncheckedCreateInput>
+  }
+
+  /**
+   * PostDetail createMany
+   */
+  export type PostDetailCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PostDetails.
+     */
+    data: PostDetailCreateManyInput | PostDetailCreateManyInput[]
+  }
+
+  /**
+   * PostDetail update
+   */
+  export type PostDetailUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PostDetail.
+     */
+    data: XOR<PostDetailUpdateInput, PostDetailUncheckedUpdateInput>
+    /**
+     * Choose, which PostDetail to update.
+     */
+    where: PostDetailWhereUniqueInput
+  }
+
+  /**
+   * PostDetail updateMany
+   */
+  export type PostDetailUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PostDetails.
+     */
+    data: XOR<PostDetailUpdateManyMutationInput, PostDetailUncheckedUpdateManyInput>
+    /**
+     * Filter which PostDetails to update
+     */
+    where?: PostDetailWhereInput
+    /**
+     * Limit how many PostDetails to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PostDetail upsert
+   */
+  export type PostDetailUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PostDetail to update in case it exists.
+     */
+    where: PostDetailWhereUniqueInput
+    /**
+     * In case the PostDetail found by the `where` argument doesn't exist, create a new PostDetail with this data.
+     */
+    create: XOR<PostDetailCreateInput, PostDetailUncheckedCreateInput>
+    /**
+     * In case the PostDetail was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PostDetailUpdateInput, PostDetailUncheckedUpdateInput>
+  }
+
+  /**
+   * PostDetail delete
+   */
+  export type PostDetailDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
+    /**
+     * Filter which PostDetail to delete.
+     */
+    where: PostDetailWhereUniqueInput
+  }
+
+  /**
+   * PostDetail deleteMany
+   */
+  export type PostDetailDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PostDetails to delete
+     */
+    where?: PostDetailWhereInput
+    /**
+     * Limit how many PostDetails to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PostDetail findRaw
+   */
+  export type PostDetailFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * PostDetail aggregateRaw
+   */
+  export type PostDetailAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * PostDetail without action
+   */
+  export type PostDetailDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PostDetail
+     */
+    select?: PostDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PostDetail
+     */
+    omit?: PostDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostDetailInclude<ExtArgs> | null
   }
 
 
@@ -3131,7 +4321,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     price: 'price',
-    img: 'img',
+    images: 'images',
     address: 'address',
     city: 'city',
     bedroom: 'bedroom',
@@ -3145,6 +4335,22 @@ export namespace Prisma {
   };
 
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
+  export const PostDetailScalarFieldEnum: {
+    id: 'id',
+    desc: 'desc',
+    utilities: 'utilities',
+    pet: 'pet',
+    income: 'income',
+    size: 'size',
+    school: 'school',
+    bus: 'bus',
+    restaurant: 'restaurant',
+    postId: 'postId'
+  };
+
+  export type PostDetailScalarFieldEnum = (typeof PostDetailScalarFieldEnum)[keyof typeof PostDetailScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3322,7 +4528,7 @@ export namespace Prisma {
     id?: StringFilter<"Post"> | string
     title?: StringFilter<"Post"> | string
     price?: IntFilter<"Post"> | number
-    img?: StringFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     address?: StringFilter<"Post"> | string
     city?: StringFilter<"Post"> | string
     bedroom?: IntFilter<"Post"> | number
@@ -3334,13 +4540,14 @@ export namespace Prisma {
     userId?: StringFilter<"Post"> | string
     createdAtd?: DateTimeFilter<"Post"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    postDetail?: XOR<PostDetailNullableScalarRelationFilter, PostDetailWhereInput> | null
   }
 
   export type PostOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
     price?: SortOrder
-    img?: SortOrder
+    images?: SortOrder
     address?: SortOrder
     city?: SortOrder
     bedroom?: SortOrder
@@ -3352,6 +4559,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAtd?: SortOrder
     user?: UserOrderByWithRelationInput
+    postDetail?: PostDetailOrderByWithRelationInput
   }
 
   export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -3361,7 +4569,7 @@ export namespace Prisma {
     NOT?: PostWhereInput | PostWhereInput[]
     title?: StringFilter<"Post"> | string
     price?: IntFilter<"Post"> | number
-    img?: StringFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     address?: StringFilter<"Post"> | string
     city?: StringFilter<"Post"> | string
     bedroom?: IntFilter<"Post"> | number
@@ -3373,13 +4581,14 @@ export namespace Prisma {
     userId?: StringFilter<"Post"> | string
     createdAtd?: DateTimeFilter<"Post"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    postDetail?: XOR<PostDetailNullableScalarRelationFilter, PostDetailWhereInput> | null
   }, "id">
 
   export type PostOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
     price?: SortOrder
-    img?: SortOrder
+    images?: SortOrder
     address?: SortOrder
     city?: SortOrder
     bedroom?: SortOrder
@@ -3404,7 +4613,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Post"> | string
     title?: StringWithAggregatesFilter<"Post"> | string
     price?: IntWithAggregatesFilter<"Post"> | number
-    img?: StringWithAggregatesFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     address?: StringWithAggregatesFilter<"Post"> | string
     city?: StringWithAggregatesFilter<"Post"> | string
     bedroom?: IntWithAggregatesFilter<"Post"> | number
@@ -3415,6 +4624,88 @@ export namespace Prisma {
     property?: EnumPropertyWithAggregatesFilter<"Post"> | $Enums.Property
     userId?: StringWithAggregatesFilter<"Post"> | string
     createdAtd?: DateTimeWithAggregatesFilter<"Post"> | Date | string
+  }
+
+  export type PostDetailWhereInput = {
+    AND?: PostDetailWhereInput | PostDetailWhereInput[]
+    OR?: PostDetailWhereInput[]
+    NOT?: PostDetailWhereInput | PostDetailWhereInput[]
+    id?: StringFilter<"PostDetail"> | string
+    desc?: StringFilter<"PostDetail"> | string
+    utilities?: StringNullableFilter<"PostDetail"> | string | null
+    pet?: StringNullableFilter<"PostDetail"> | string | null
+    income?: StringNullableFilter<"PostDetail"> | string | null
+    size?: IntNullableFilter<"PostDetail"> | number | null
+    school?: IntNullableFilter<"PostDetail"> | number | null
+    bus?: IntNullableFilter<"PostDetail"> | number | null
+    restaurant?: IntNullableFilter<"PostDetail"> | number | null
+    postId?: StringFilter<"PostDetail"> | string
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+  }
+
+  export type PostDetailOrderByWithRelationInput = {
+    id?: SortOrder
+    desc?: SortOrder
+    utilities?: SortOrder
+    pet?: SortOrder
+    income?: SortOrder
+    size?: SortOrder
+    school?: SortOrder
+    bus?: SortOrder
+    restaurant?: SortOrder
+    postId?: SortOrder
+    post?: PostOrderByWithRelationInput
+  }
+
+  export type PostDetailWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    postId?: string
+    AND?: PostDetailWhereInput | PostDetailWhereInput[]
+    OR?: PostDetailWhereInput[]
+    NOT?: PostDetailWhereInput | PostDetailWhereInput[]
+    desc?: StringFilter<"PostDetail"> | string
+    utilities?: StringNullableFilter<"PostDetail"> | string | null
+    pet?: StringNullableFilter<"PostDetail"> | string | null
+    income?: StringNullableFilter<"PostDetail"> | string | null
+    size?: IntNullableFilter<"PostDetail"> | number | null
+    school?: IntNullableFilter<"PostDetail"> | number | null
+    bus?: IntNullableFilter<"PostDetail"> | number | null
+    restaurant?: IntNullableFilter<"PostDetail"> | number | null
+    post?: XOR<PostScalarRelationFilter, PostWhereInput>
+  }, "id" | "postId">
+
+  export type PostDetailOrderByWithAggregationInput = {
+    id?: SortOrder
+    desc?: SortOrder
+    utilities?: SortOrder
+    pet?: SortOrder
+    income?: SortOrder
+    size?: SortOrder
+    school?: SortOrder
+    bus?: SortOrder
+    restaurant?: SortOrder
+    postId?: SortOrder
+    _count?: PostDetailCountOrderByAggregateInput
+    _avg?: PostDetailAvgOrderByAggregateInput
+    _max?: PostDetailMaxOrderByAggregateInput
+    _min?: PostDetailMinOrderByAggregateInput
+    _sum?: PostDetailSumOrderByAggregateInput
+  }
+
+  export type PostDetailScalarWhereWithAggregatesInput = {
+    AND?: PostDetailScalarWhereWithAggregatesInput | PostDetailScalarWhereWithAggregatesInput[]
+    OR?: PostDetailScalarWhereWithAggregatesInput[]
+    NOT?: PostDetailScalarWhereWithAggregatesInput | PostDetailScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PostDetail"> | string
+    desc?: StringWithAggregatesFilter<"PostDetail"> | string
+    utilities?: StringNullableWithAggregatesFilter<"PostDetail"> | string | null
+    pet?: StringNullableWithAggregatesFilter<"PostDetail"> | string | null
+    income?: StringNullableWithAggregatesFilter<"PostDetail"> | string | null
+    size?: IntNullableWithAggregatesFilter<"PostDetail"> | number | null
+    school?: IntNullableWithAggregatesFilter<"PostDetail"> | number | null
+    bus?: IntNullableWithAggregatesFilter<"PostDetail"> | number | null
+    restaurant?: IntNullableWithAggregatesFilter<"PostDetail"> | number | null
+    postId?: StringWithAggregatesFilter<"PostDetail"> | string
   }
 
   export type UserCreateInput = {
@@ -3484,7 +4775,7 @@ export namespace Prisma {
     id?: string
     title: string
     price: number
-    img: string
+    images?: PostCreateimagesInput | string[]
     address: string
     city: string
     bedroom: number
@@ -3495,13 +4786,14 @@ export namespace Prisma {
     property: $Enums.Property
     createdAtd?: Date | string
     user: UserCreateNestedOneWithoutPostsInput
+    postDetail?: PostDetailCreateNestedOneWithoutPostInput
   }
 
   export type PostUncheckedCreateInput = {
     id?: string
     title: string
     price: number
-    img: string
+    images?: PostCreateimagesInput | string[]
     address: string
     city: string
     bedroom: number
@@ -3512,12 +4804,13 @@ export namespace Prisma {
     property: $Enums.Property
     userId: string
     createdAtd?: Date | string
+    postDetail?: PostDetailUncheckedCreateNestedOneWithoutPostInput
   }
 
   export type PostUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
-    img?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     bedroom?: IntFieldUpdateOperationsInput | number
@@ -3528,12 +4821,13 @@ export namespace Prisma {
     property?: EnumPropertyFieldUpdateOperationsInput | $Enums.Property
     createdAtd?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
+    postDetail?: PostDetailUpdateOneWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
-    img?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     bedroom?: IntFieldUpdateOperationsInput | number
@@ -3544,13 +4838,14 @@ export namespace Prisma {
     property?: EnumPropertyFieldUpdateOperationsInput | $Enums.Property
     userId?: StringFieldUpdateOperationsInput | string
     createdAtd?: DateTimeFieldUpdateOperationsInput | Date | string
+    postDetail?: PostDetailUncheckedUpdateOneWithoutPostNestedInput
   }
 
   export type PostCreateManyInput = {
     id?: string
     title: string
     price: number
-    img: string
+    images?: PostCreateimagesInput | string[]
     address: string
     city: string
     bedroom: number
@@ -3566,7 +4861,7 @@ export namespace Prisma {
   export type PostUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
-    img?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     bedroom?: IntFieldUpdateOperationsInput | number
@@ -3581,7 +4876,7 @@ export namespace Prisma {
   export type PostUncheckedUpdateManyInput = {
     title?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
-    img?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     bedroom?: IntFieldUpdateOperationsInput | number
@@ -3592,6 +4887,92 @@ export namespace Prisma {
     property?: EnumPropertyFieldUpdateOperationsInput | $Enums.Property
     userId?: StringFieldUpdateOperationsInput | string
     createdAtd?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostDetailCreateInput = {
+    id?: string
+    desc: string
+    utilities?: string | null
+    pet?: string | null
+    income?: string | null
+    size?: number | null
+    school?: number | null
+    bus?: number | null
+    restaurant?: number | null
+    post: PostCreateNestedOneWithoutPostDetailInput
+  }
+
+  export type PostDetailUncheckedCreateInput = {
+    id?: string
+    desc: string
+    utilities?: string | null
+    pet?: string | null
+    income?: string | null
+    size?: number | null
+    school?: number | null
+    bus?: number | null
+    restaurant?: number | null
+    postId: string
+  }
+
+  export type PostDetailUpdateInput = {
+    desc?: StringFieldUpdateOperationsInput | string
+    utilities?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: NullableStringFieldUpdateOperationsInput | string | null
+    income?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
+    school?: NullableIntFieldUpdateOperationsInput | number | null
+    bus?: NullableIntFieldUpdateOperationsInput | number | null
+    restaurant?: NullableIntFieldUpdateOperationsInput | number | null
+    post?: PostUpdateOneRequiredWithoutPostDetailNestedInput
+  }
+
+  export type PostDetailUncheckedUpdateInput = {
+    desc?: StringFieldUpdateOperationsInput | string
+    utilities?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: NullableStringFieldUpdateOperationsInput | string | null
+    income?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
+    school?: NullableIntFieldUpdateOperationsInput | number | null
+    bus?: NullableIntFieldUpdateOperationsInput | number | null
+    restaurant?: NullableIntFieldUpdateOperationsInput | number | null
+    postId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PostDetailCreateManyInput = {
+    id?: string
+    desc: string
+    utilities?: string | null
+    pet?: string | null
+    income?: string | null
+    size?: number | null
+    school?: number | null
+    bus?: number | null
+    restaurant?: number | null
+    postId: string
+  }
+
+  export type PostDetailUpdateManyMutationInput = {
+    desc?: StringFieldUpdateOperationsInput | string
+    utilities?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: NullableStringFieldUpdateOperationsInput | string | null
+    income?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
+    school?: NullableIntFieldUpdateOperationsInput | number | null
+    bus?: NullableIntFieldUpdateOperationsInput | number | null
+    restaurant?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PostDetailUncheckedUpdateManyInput = {
+    desc?: StringFieldUpdateOperationsInput | string
+    utilities?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: NullableStringFieldUpdateOperationsInput | string | null
+    income?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
+    school?: NullableIntFieldUpdateOperationsInput | number | null
+    bus?: NullableIntFieldUpdateOperationsInput | number | null
+    restaurant?: NullableIntFieldUpdateOperationsInput | number | null
+    postId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3735,6 +5116,14 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type EnumTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
     in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
@@ -3754,11 +5143,16 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type PostDetailNullableScalarRelationFilter = {
+    is?: PostDetailWhereInput | null
+    isNot?: PostDetailWhereInput | null
+  }
+
   export type PostCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     price?: SortOrder
-    img?: SortOrder
+    images?: SortOrder
     address?: SortOrder
     city?: SortOrder
     bedroom?: SortOrder
@@ -3781,7 +5175,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     price?: SortOrder
-    img?: SortOrder
     address?: SortOrder
     city?: SortOrder
     bedroom?: SortOrder
@@ -3798,7 +5191,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     price?: SortOrder
-    img?: SortOrder
     address?: SortOrder
     city?: SortOrder
     bedroom?: SortOrder
@@ -3851,6 +5243,93 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPropertyFilter<$PrismaModel>
     _max?: NestedEnumPropertyFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
+  export type PostScalarRelationFilter = {
+    is?: PostWhereInput
+    isNot?: PostWhereInput
+  }
+
+  export type PostDetailCountOrderByAggregateInput = {
+    id?: SortOrder
+    desc?: SortOrder
+    utilities?: SortOrder
+    pet?: SortOrder
+    income?: SortOrder
+    size?: SortOrder
+    school?: SortOrder
+    bus?: SortOrder
+    restaurant?: SortOrder
+    postId?: SortOrder
+  }
+
+  export type PostDetailAvgOrderByAggregateInput = {
+    size?: SortOrder
+    school?: SortOrder
+    bus?: SortOrder
+    restaurant?: SortOrder
+  }
+
+  export type PostDetailMaxOrderByAggregateInput = {
+    id?: SortOrder
+    desc?: SortOrder
+    utilities?: SortOrder
+    pet?: SortOrder
+    income?: SortOrder
+    size?: SortOrder
+    school?: SortOrder
+    bus?: SortOrder
+    restaurant?: SortOrder
+    postId?: SortOrder
+  }
+
+  export type PostDetailMinOrderByAggregateInput = {
+    id?: SortOrder
+    desc?: SortOrder
+    utilities?: SortOrder
+    pet?: SortOrder
+    income?: SortOrder
+    size?: SortOrder
+    school?: SortOrder
+    bus?: SortOrder
+    restaurant?: SortOrder
+    postId?: SortOrder
+  }
+
+  export type PostDetailSumOrderByAggregateInput = {
+    size?: SortOrder
+    school?: SortOrder
+    bus?: SortOrder
+    restaurant?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type PostCreateNestedManyWithoutUserInput = {
@@ -3908,10 +5387,26 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type PostCreateimagesInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type PostDetailCreateNestedOneWithoutPostInput = {
+    create?: XOR<PostDetailCreateWithoutPostInput, PostDetailUncheckedCreateWithoutPostInput>
+    connectOrCreate?: PostDetailCreateOrConnectWithoutPostInput
+    connect?: PostDetailWhereUniqueInput
+  }
+
+  export type PostDetailUncheckedCreateNestedOneWithoutPostInput = {
+    create?: XOR<PostDetailCreateWithoutPostInput, PostDetailUncheckedCreateWithoutPostInput>
+    connectOrCreate?: PostDetailCreateOrConnectWithoutPostInput
+    connect?: PostDetailWhereUniqueInput
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -3920,6 +5415,11 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type PostUpdateimagesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type EnumTypeFieldUpdateOperationsInput = {
@@ -3936,6 +5436,49 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPostsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type PostDetailUpdateOneWithoutPostNestedInput = {
+    create?: XOR<PostDetailCreateWithoutPostInput, PostDetailUncheckedCreateWithoutPostInput>
+    connectOrCreate?: PostDetailCreateOrConnectWithoutPostInput
+    upsert?: PostDetailUpsertWithoutPostInput
+    disconnect?: PostDetailWhereInput | boolean
+    delete?: PostDetailWhereInput | boolean
+    connect?: PostDetailWhereUniqueInput
+    update?: XOR<XOR<PostDetailUpdateToOneWithWhereWithoutPostInput, PostDetailUpdateWithoutPostInput>, PostDetailUncheckedUpdateWithoutPostInput>
+  }
+
+  export type PostDetailUncheckedUpdateOneWithoutPostNestedInput = {
+    create?: XOR<PostDetailCreateWithoutPostInput, PostDetailUncheckedCreateWithoutPostInput>
+    connectOrCreate?: PostDetailCreateOrConnectWithoutPostInput
+    upsert?: PostDetailUpsertWithoutPostInput
+    disconnect?: PostDetailWhereInput | boolean
+    delete?: PostDetailWhereInput | boolean
+    connect?: PostDetailWhereUniqueInput
+    update?: XOR<XOR<PostDetailUpdateToOneWithWhereWithoutPostInput, PostDetailUpdateWithoutPostInput>, PostDetailUncheckedUpdateWithoutPostInput>
+  }
+
+  export type PostCreateNestedOneWithoutPostDetailInput = {
+    create?: XOR<PostCreateWithoutPostDetailInput, PostUncheckedCreateWithoutPostDetailInput>
+    connectOrCreate?: PostCreateOrConnectWithoutPostDetailInput
+    connect?: PostWhereUniqueInput
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+    unset?: boolean
+  }
+
+  export type PostUpdateOneRequiredWithoutPostDetailNestedInput = {
+    create?: XOR<PostCreateWithoutPostDetailInput, PostUncheckedCreateWithoutPostDetailInput>
+    connectOrCreate?: PostCreateOrConnectWithoutPostDetailInput
+    upsert?: PostUpsertWithoutPostDetailInput
+    connect?: PostWhereUniqueInput
+    update?: XOR<XOR<PostUpdateToOneWithWhereWithoutPostDetailInput, PostUpdateWithoutPostDetailInput>, PostUncheckedUpdateWithoutPostDetailInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -4111,11 +5654,40 @@ export namespace Prisma {
     _max?: NestedEnumPropertyFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
   export type PostCreateWithoutUserInput = {
     id?: string
     title: string
     price: number
-    img: string
+    images?: PostCreateimagesInput | string[]
     address: string
     city: string
     bedroom: number
@@ -4125,13 +5697,14 @@ export namespace Prisma {
     type: $Enums.Type
     property: $Enums.Property
     createdAtd?: Date | string
+    postDetail?: PostDetailCreateNestedOneWithoutPostInput
   }
 
   export type PostUncheckedCreateWithoutUserInput = {
     id?: string
     title: string
     price: number
-    img: string
+    images?: PostCreateimagesInput | string[]
     address: string
     city: string
     bedroom: number
@@ -4141,6 +5714,7 @@ export namespace Prisma {
     type: $Enums.Type
     property: $Enums.Property
     createdAtd?: Date | string
+    postDetail?: PostDetailUncheckedCreateNestedOneWithoutPostInput
   }
 
   export type PostCreateOrConnectWithoutUserInput = {
@@ -4175,7 +5749,7 @@ export namespace Prisma {
     id?: StringFilter<"Post"> | string
     title?: StringFilter<"Post"> | string
     price?: IntFilter<"Post"> | number
-    img?: StringFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     address?: StringFilter<"Post"> | string
     city?: StringFilter<"Post"> | string
     bedroom?: IntFilter<"Post"> | number
@@ -4211,6 +5785,35 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
   }
 
+  export type PostDetailCreateWithoutPostInput = {
+    id?: string
+    desc: string
+    utilities?: string | null
+    pet?: string | null
+    income?: string | null
+    size?: number | null
+    school?: number | null
+    bus?: number | null
+    restaurant?: number | null
+  }
+
+  export type PostDetailUncheckedCreateWithoutPostInput = {
+    id?: string
+    desc: string
+    utilities?: string | null
+    pet?: string | null
+    income?: string | null
+    size?: number | null
+    school?: number | null
+    bus?: number | null
+    restaurant?: number | null
+  }
+
+  export type PostDetailCreateOrConnectWithoutPostInput = {
+    where: PostDetailWhereUniqueInput
+    create: XOR<PostDetailCreateWithoutPostInput, PostDetailUncheckedCreateWithoutPostInput>
+  }
+
   export type UserUpsertWithoutPostsInput = {
     update: XOR<UserUpdateWithoutPostsInput, UserUncheckedUpdateWithoutPostsInput>
     create: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
@@ -4238,11 +5841,126 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PostDetailUpsertWithoutPostInput = {
+    update: XOR<PostDetailUpdateWithoutPostInput, PostDetailUncheckedUpdateWithoutPostInput>
+    create: XOR<PostDetailCreateWithoutPostInput, PostDetailUncheckedCreateWithoutPostInput>
+    where?: PostDetailWhereInput
+  }
+
+  export type PostDetailUpdateToOneWithWhereWithoutPostInput = {
+    where?: PostDetailWhereInput
+    data: XOR<PostDetailUpdateWithoutPostInput, PostDetailUncheckedUpdateWithoutPostInput>
+  }
+
+  export type PostDetailUpdateWithoutPostInput = {
+    desc?: StringFieldUpdateOperationsInput | string
+    utilities?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: NullableStringFieldUpdateOperationsInput | string | null
+    income?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
+    school?: NullableIntFieldUpdateOperationsInput | number | null
+    bus?: NullableIntFieldUpdateOperationsInput | number | null
+    restaurant?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PostDetailUncheckedUpdateWithoutPostInput = {
+    desc?: StringFieldUpdateOperationsInput | string
+    utilities?: NullableStringFieldUpdateOperationsInput | string | null
+    pet?: NullableStringFieldUpdateOperationsInput | string | null
+    income?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
+    school?: NullableIntFieldUpdateOperationsInput | number | null
+    bus?: NullableIntFieldUpdateOperationsInput | number | null
+    restaurant?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PostCreateWithoutPostDetailInput = {
+    id?: string
+    title: string
+    price: number
+    images?: PostCreateimagesInput | string[]
+    address: string
+    city: string
+    bedroom: number
+    bathroom: number
+    latitude: string
+    longitude: string
+    type: $Enums.Type
+    property: $Enums.Property
+    createdAtd?: Date | string
+    user: UserCreateNestedOneWithoutPostsInput
+  }
+
+  export type PostUncheckedCreateWithoutPostDetailInput = {
+    id?: string
+    title: string
+    price: number
+    images?: PostCreateimagesInput | string[]
+    address: string
+    city: string
+    bedroom: number
+    bathroom: number
+    latitude: string
+    longitude: string
+    type: $Enums.Type
+    property: $Enums.Property
+    userId: string
+    createdAtd?: Date | string
+  }
+
+  export type PostCreateOrConnectWithoutPostDetailInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutPostDetailInput, PostUncheckedCreateWithoutPostDetailInput>
+  }
+
+  export type PostUpsertWithoutPostDetailInput = {
+    update: XOR<PostUpdateWithoutPostDetailInput, PostUncheckedUpdateWithoutPostDetailInput>
+    create: XOR<PostCreateWithoutPostDetailInput, PostUncheckedCreateWithoutPostDetailInput>
+    where?: PostWhereInput
+  }
+
+  export type PostUpdateToOneWithWhereWithoutPostDetailInput = {
+    where?: PostWhereInput
+    data: XOR<PostUpdateWithoutPostDetailInput, PostUncheckedUpdateWithoutPostDetailInput>
+  }
+
+  export type PostUpdateWithoutPostDetailInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    images?: PostUpdateimagesInput | string[]
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    bedroom?: IntFieldUpdateOperationsInput | number
+    bathroom?: IntFieldUpdateOperationsInput | number
+    latitude?: StringFieldUpdateOperationsInput | string
+    longitude?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
+    property?: EnumPropertyFieldUpdateOperationsInput | $Enums.Property
+    createdAtd?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPostsNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutPostDetailInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    price?: IntFieldUpdateOperationsInput | number
+    images?: PostUpdateimagesInput | string[]
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    bedroom?: IntFieldUpdateOperationsInput | number
+    bathroom?: IntFieldUpdateOperationsInput | number
+    latitude?: StringFieldUpdateOperationsInput | string
+    longitude?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
+    property?: EnumPropertyFieldUpdateOperationsInput | $Enums.Property
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAtd?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PostCreateManyUserInput = {
     id?: string
     title: string
     price: number
-    img: string
+    images?: PostCreateimagesInput | string[]
     address: string
     city: string
     bedroom: number
@@ -4257,7 +5975,7 @@ export namespace Prisma {
   export type PostUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
-    img?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     bedroom?: IntFieldUpdateOperationsInput | number
@@ -4267,12 +5985,13 @@ export namespace Prisma {
     type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     property?: EnumPropertyFieldUpdateOperationsInput | $Enums.Property
     createdAtd?: DateTimeFieldUpdateOperationsInput | Date | string
+    postDetail?: PostDetailUpdateOneWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
-    img?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     bedroom?: IntFieldUpdateOperationsInput | number
@@ -4282,12 +6001,13 @@ export namespace Prisma {
     type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     property?: EnumPropertyFieldUpdateOperationsInput | $Enums.Property
     createdAtd?: DateTimeFieldUpdateOperationsInput | Date | string
+    postDetail?: PostDetailUncheckedUpdateOneWithoutPostNestedInput
   }
 
   export type PostUncheckedUpdateManyWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
-    img?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     address?: StringFieldUpdateOperationsInput | string
     city?: StringFieldUpdateOperationsInput | string
     bedroom?: IntFieldUpdateOperationsInput | number
